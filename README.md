@@ -12,7 +12,7 @@
 ##### •	Kubeconfig is necessary to access the cluster from the local machine 
 ##### •	Download kubeconfig.yaml from linode and set it as an environmental variable:
 ##### •	export KUBECONFIG=test-kubeconfig.yaml
-##### • Deployed replicated MongoDB (StatefulSet using Helm Chart) and configured Data Persistence with Linode Block Storage:
+##### • Deploy replicated MongoDB (StatefulSet using Helm Chart) and configured Data Persistence with Linode Block Storage:
 ##### •	add helm chart  repository: helm repo add bitnami https://charts.bitnami.com/bitnami
 ##### •	create a yaml file to overwrite the parameters
 ##### •	to overwrite execute command : helm install [our name] –-values [value file name] ]chart name]
@@ -34,3 +34,9 @@ Configured Ingress rule and execute command:  kubectl apply -f test-ingress.yaml
 
 To scale down stateful set: kubectl scale –replicas=0 statefulset/mongodb
 
+
+
+# Project: Deploy App from Private Docker Registry:
+##### Logg in to AWS Container Repository | docker login and create docker config.json file
+##### Create Secret component
+##### Configure Deployment for demo app
