@@ -40,3 +40,15 @@ To scale down stateful set: kubectl scale –replicas=0 statefulset/mongodb
 ##### Logg in to AWS Container Repository | docker login and create docker config.json file
 ##### Create Secret component
 ##### Configure Deployment for demo app
+
+# Deploy Prometheus Stack using Helm
+##### Install Prometheus Operator Helm Chart:
+. helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
+
+##### Accessed Grafana UI (configured port-forward): 
+•	kubectl port-forward deployment/prometheus-grafana 3000
+
+
+##### Accessed Prometheus UI (configured port-forward):
+•	kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
+
