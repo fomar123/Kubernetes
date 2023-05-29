@@ -43,12 +43,12 @@ To scale down stateful set: kubectl scale –replicas=0 statefulset/mongodb
 
 # Deploy Prometheus Stack using Helm
 ##### Install Prometheus Operator Helm Chart:
-. helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
+ helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
 
 ##### Accessed Grafana UI (configured port-forward): 
-•	kubectl port-forward deployment/prometheus-grafana 3000
+kubectl port-forward deployment/prometheus-grafana 3000
 
 
 ##### Accessed Prometheus UI (configured port-forward):
-•	kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
+kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
 
