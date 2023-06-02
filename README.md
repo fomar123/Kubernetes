@@ -61,3 +61,24 @@ export KUBECONFIG=~/Downloads/online-shop-microservices-kubeconfig.yaml
 kubectl create ns microservices
 kubectl apply -f config.yaml -n microservices 
 ##### Accessed Online Shop with Browser 
+
+# Project: Improved Microservices Config Files. Security Best Practices
+##### Added version to each container image
+##### Configured Liveness Probe for each containe:
+e.g: livenessProbe:
+
+          periodSeconds: 5
+          
+          exec:
+          
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+##### Configured Readiness Probe for each container:
+e.g:   readinessProbe:
+
+          periodSeconds: 5
+          
+          exec:
+          
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+
+            
