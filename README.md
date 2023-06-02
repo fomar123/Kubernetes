@@ -55,7 +55,8 @@ kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
 # Project: Deploy Microservices Application
 ##### Created YAML file with 11 Deployments and Services
 ##### Created a K8s cluster with 3 Worker Nodes on Linode
-##### Connected to the cluster
+##### Connect to Kubernetes Cluster With Kubeconfig.yaml file:
+export KUBECONFIG=~/Downloads/online-shop-microservices-kubeconfig.yaml 
 ##### Created a Namespace and deployed all the microervices into it:
 kubectl create ns microservices
 kubectl apply -f config.yaml -n microservices 
