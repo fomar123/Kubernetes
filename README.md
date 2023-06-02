@@ -52,3 +52,11 @@ kubectl port-forward deployment/prometheus-grafana 3000
 ##### Accessed Prometheus UI (configured port-forward):
 kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
 
+# Project: Deploy Microservices Application
+##### Created YAML file with 11 Deployments and Services
+##### Created a K8s cluster with 3 Worker Nodes on Linode
+##### Connected to the cluster
+##### Created a Namespace and deployed all the microervices into it:
+kubectl create ns microservices
+kubectl apply -f config.yaml -n microservices 
+##### Accessed Online Shop with Browser 
