@@ -65,20 +65,39 @@ kubectl apply -f config.yaml -n microservices
 # Project: Improved Microservices Config Files. Security Best Practices
 ##### Added version to each container image
 ##### Configured Liveness Probe for each containe:
-e.g: livenessProbe:
 
-          periodSeconds: 5
+ 
+    livenessProbe:
+   
+    periodSeconds: 5
           
           exec:
           
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
 ##### Configured Readiness Probe for each container:
-e.g:   readinessProbe:
 
-          periodSeconds: 5
+  
+ 
+      readinessProbe:
+  
+       periodSeconds: 5
           
           exec:
           
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
 
+ ##### Configured Resource Requests resources and Resource Limits: 
+ 
+          requests:
+          
+            cpu: 100m
             
+            memory: 64Mi
+            
+          limits:
+          
+            cpu: 200m
+            
+            memory: 128Mi
+        
+  #####  Configure more than 1 Replica for each Deployment            
