@@ -11,11 +11,13 @@
 ##### Created K8s cluster on Linode Kubernetes Engine:
 ##### •	Kubeconfig is necessary to access the cluster from the local machine 
 ##### •	Download kubeconfig.yaml from linode and set it as an environmental variable:
-##### •	export KUBECONFIG=test-kubeconfig.yaml
+
+       	export KUBECONFIG=test-kubeconfig.yaml
 ##### • Deploy replicated MongoDB (StatefulSet using Helm Chart) and configured Data Persistence with Linode Block Storage:
 ##### •	add helm chart  repository: helm repo add bitnami https://charts.bitnami.com/bitnami
 ##### •	create a yaml file to overwrite the parameters
-##### •	to overwrite execute command : helm install [our name] –-values [value file name] ]chart name]
+##### •	to overwrite execute command:
+          helm install [our name] –-values [value file name] ]chart name]
 
 Deployed replicated MongoDB (StatefulSet using Helm Chart) and configured Data Persistence with Linode Block Storage: 
 ##### •	add helm chart  repository: helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -24,7 +26,8 @@ Deployed replicated MongoDB (StatefulSet using Helm Chart) and configured Data P
 
 Deployed MongoExpress (Deployment and Service):
 ##### •	create a mongo-express deployment configuration 
-##### •	execute command to deploy mongo-express : kubectl apply -f test-mongo-express.yaml
+##### •	execute command to deploy mongo-express: 
+          kubectl apply -f test-mongo-express.yaml
 
 Deployed NGINX Ingress Controller as Loadbalancer (using Helm Chart:
 ##### •	add helm repository:  helm repo add stable https://charts.helm.sh/stable
@@ -100,4 +103,20 @@ kubectl apply -f config.yaml -n microservices
             
             memory: 128Mi
         
-  #####  Configure more than 1 Replica for each Deployment            
+ #####  Configure more than 1 Replica for each Deployment     
+  
+ # Project: Create Helm Chart for Microservices and Deploy Microservices with Helmfile
+ 
+ #####  Created “microservices” Helm Chart
+ 
+ #####  Created values.yaml files for each microservice
+ 
+ #####  Created “redis” Helm Chart
+ 
+ #####  Deployed Microservices Application with “helm install”:
+    
+    helm install -f [name of file] [realse name] [chart name]
+    
+ ##### Created Helmfile
+ ##### Install Helmfile:
+         helmfile sync
