@@ -129,7 +129,7 @@ kubectl apply -f config.yaml -n microservices
 ##### Installed aws-iam-authenticator inside Jenkins Container:
         curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
 
-
+##### 
         Apply execute permissions to the binary:
            chmod +x ./aws-iam-authenticator
            
@@ -139,4 +139,8 @@ kubectl apply -f config.yaml -n microservices
 
 ##### Created ./kube/config and copied inside the Jenkins Container:
           docker cp config f16b145b5924:/var/jenkins_home/.kube
-         
+          
+##### Created Jenkins Credential  
+
+##### Created simple Jenkinsfile that deploys to EKS cluster
+
