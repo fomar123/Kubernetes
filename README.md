@@ -142,5 +142,5 @@ kubectl apply -f config.yaml -n microservices
           
 ##### Created Jenkins Credential  
 
-##### Created simple Jenkinsfile that deploys to EKS cluster
+##### Created Jenkinsfile that deploys an EKS cluster
 
