@@ -145,7 +145,7 @@ kubectl apply -f config.yaml -n microservices
 ##### Created Jenkinsfile that deploys an EKS cluster
 
       
- # Create EKS cluster with Node Group
+#  Project: Create EKS cluster with Node Group
  
 ##### Created EKS Role 
 ##### Created VPC with Cloudformation Template
