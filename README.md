@@ -144,3 +144,23 @@ kubectl apply -f config.yaml -n microservices
 
 ##### Created Jenkinsfile that deploys an EKS cluster
 
+      
+ # Create EKS cluster with Node Group
+ 
+##### Created EKS Role 
+##### Created VPC with Cloudformation Template
+##### Created EKS cluster
+##### Connected to EKS cluster with kubectl locally:
+        create kubeconfig file: 
+           aws eks  update-kubeconfig  --name  [name of cluster]
+ ##### Created Node Group Role 
+ ##### Created Node Group: EC2 Instances - Worker Nodes
+ #####  Configure Auto-Scaling - Deployed cluster-autoscaler Pod
+          Created new Policy for Auto-Scaling Permission
+          Attached new Policy to existing Node Group Role
+          Deployed Autoscaler Component in EKS cluster:
+             kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml 
+        
+ #####  Deployed Nginx Pod and Service:  
+           kubectl apply -f nginx-config.yaml
+ 
