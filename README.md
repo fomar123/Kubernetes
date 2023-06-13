@@ -163,6 +163,7 @@ kubectl apply -f config.yaml -n microservices
         
  #####  Deployed Nginx Pod and Service:  
            kubectl apply -f nginx-config.yaml
+            
            
 #    Project - Create Pipeline and deploy to Linode Kubernetes cluster:
 #####      Created LKE cluster and Download kubeconfig.yaml from linode and set it as an environmental variable:
@@ -171,5 +172,32 @@ kubectl apply -f config.yaml -n microservices
 ##### Installed Kubernetes CLI Plugin on Jenkins
 ##### Created Jenkinsfile that deploys to LKE cluster
  
+ 
+ 
+# Project - Complete CI/CD Pipeline with DockerHub:
+#####  Created Deployment and Service for App deployment
+#####  Adjust Jenkinsfile to set environment variables with envsubs
+##### Installed “gettext-base” tool inside Jenkins Container on DigitalOcean Server in CLI:
+       First go to root user :
+             docker exec -it -u 0 <container name> bash
+	   Install gettext-base:
+              apt-get install gettext-base 
+##### Created Secret for DockerHub Registry in EKS cluster (connect to EKS cluster if not already) and reference it in the  Deployment file:
+        kubectl create secret docker-registry my-registry-key \
+        --docker-server=docker.io \
+        --docker-username=fomar123 \
+        --docker-password=<your docker passoword>
+#####  Executed Jenkins Pipeline 
+
+
+#  Project - Complete CI/CD Pipeline with AWS ECR
+##### Created ECR Repository in AWS
+##### Created Credential for ECR repository in Jenkins
+##### Created Secret for AWS ECR Registry in EKS cluster and adjusted reference in Deployment file: 
+
+	   Create Secret in CLI:
+               kubectl create secret docker-registry aws-registry key --docker-server=<your docker repository url> \
+               --docker-username=<your username> \
+               --docker-password=<your password >
 
  
