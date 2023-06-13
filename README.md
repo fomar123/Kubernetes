@@ -163,4 +163,16 @@ kubectl apply -f config.yaml -n microservices
         
  #####  Deployed Nginx Pod and Service:  
            kubectl apply -f nginx-config.yaml
+           
+ 
+ #     Project - Create Pipeline that deploys to EKS cluster
+ 
+ #####  Installed kubectl inside Jenkins Container: 
+           curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+ #####  Installed aws-iam-authenticator inside Jenkins Container:
+            curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
+ #####  Apply execute permissions to the binary:
+                  chmod +x ./aws-iam-authenticator
+ #####  Move aws authenticator file:
+          mv ./aws-iam-authenticator /usr/local/bin
  
