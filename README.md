@@ -155,24 +155,21 @@ kubectl apply -f config.yaml -n microservices
            aws eks  update-kubeconfig  --name  [name of cluster]
  ##### Created Node Group Role 
  ##### Created Node Group: EC2 Instances - Worker Nodes
- #####  Configure Auto-Scaling - Deployed cluster-autoscaler Pod
-          Created new Policy for Auto-Scaling Permission
-          Attached new Policy to existing Node Group Role
-          Deployed Autoscaler Component in EKS cluster:
+ ##### Configure Auto-Scaling - Deployed cluster-autoscaler Pod
+ ##### Created new Policy for Auto-Scaling Permission
+ ##### Attached new Policy to existing Node Group Role
+ #####  Deployed Autoscaler Component in EKS cluster:
              kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml 
         
  #####  Deployed Nginx Pod and Service:  
            kubectl apply -f nginx-config.yaml
            
+#    Project - Create Pipeline and deploy to Linode Kubernetes cluster:
+#####      Created LKE cluster and Download kubeconfig.yaml from linode and set it as an environmental variable:
+                export KUBECONFIG=~/Downloads/LKS-kubeconfig.yaml
+#####        Created Jenkins Credential with kubeconfig file
+##### Installed Kubernetes CLI Plugin on Jenkins
+##### Created Jenkinsfile that deploys to LKE cluster
  
- #     Project - Create Pipeline that deploys to EKS cluster
- 
- #####  Installed kubectl inside Jenkins Container: 
-           curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
- #####  Installed aws-iam-authenticator inside Jenkins Container:
-            curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
- #####  Apply execute permissions to the binary:
-                  chmod +x ./aws-iam-authenticator
- #####  Move aws authenticator file:
-          mv ./aws-iam-authenticator /usr/local/bin
+
  
