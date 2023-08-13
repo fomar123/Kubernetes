@@ -6,6 +6,13 @@
 ##### Adjusted Mosquitto Deployment to include volumes
 
 
+# Demo:ConfigMap & Secret Volume
+##### Create Mosquitto Deployment Without Volumes:
+- Create a Mosquitto Deployment in a YAML file (mosquitto-without-volumes.yaml)
+- Define metadata, spec, and containers with the Mosquitto image and ports
+
+
+
 
 # Project: Install a Stateful Application on K8s using Helm
 ##### Created K8s cluster on Linode Kubernetes Engine:
