@@ -121,14 +121,21 @@ To scale down stateful set:
   
 # Deploy Prometheus Stack using Helm
 ##### Install Prometheus Operator Helm Chart:
- helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
+- Use Helm to install the Prometheus Operator Helm chart:
 
-##### Accessed Grafana UI (configured port-forward): 
-kubectl port-forward deployment/prometheus-grafana 3000
+       helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
+  
+##### Access Grafana UI (Port Forwarding):
+- Forward local port to Grafana deployment:
+
+      kubectl port-forward deployment/prometheus-grafana 3000
+
+##### Access Prometheus UI (Port Forwarding):
+- Forward local port to Prometheus pod:
+
+       kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
 
 
-##### Accessed Prometheus UI (configured port-forward):
-kubectl port-forward prometheus-prometheus-kube-prometheus-prometheus-0 9090
 
 # Project: Deploy Microservices Application
 ##### Created YAML file with 11 Deployments and Services
