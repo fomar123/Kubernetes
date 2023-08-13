@@ -1,18 +1,39 @@
 # Demo:ConfigMap & Secret Volume
-##### Created Mosquitto Deployment without any volumes
-##### Created ConfigMap component to overwrite mosquitto.conf file.
-##### Created Secret component to add passwords file
-##### Created Secret component to add passwords file
-##### Adjusted Mosquitto Deployment to include volumes
-
-
-# Demo:ConfigMap & Secret Volume
 ##### Create Mosquitto Deployment Without Volumes:
 - Create a Mosquitto Deployment in a YAML file (mosquitto-without-volumes.yaml)
 - Define metadata, spec, and containers with the Mosquitto image and ports
 
+##### Create ConfigMap Component to Overwrite mosquitto.conf File:
+- Define a ConfigMap in a YAML file (configmap-file.yaml).
+- Include metadata and data for mosquitto.conf customization.
+- Apply the ConfigMap using:
+  
+         kubectl apply -f configmap-file.yaml.
+  
+- Create Secret Component for Passwords File:
 
+##### Define a Secret in a YAML file (secret-file.yaml).
+- Include metadata and base64-encoded data for usernames and passwords.
+- Apply the Secret using:
+  
+         kubectl apply -f secret-file.yaml.
+  
+- Adjust Mosquitto Deployment to Include Volumes:
 
+##### Edit the mosquitto.yaml file.
+- Add volumeMounts to the Mosquitto container for mounting ConfigMap and Secret.
+- Add volumes to the Deployment spec, referencing the ConfigMap and Secret.
+- Apply the updated Deployment using:
+
+   kubectl apply -f mosquitto-deployment.yaml.
+  
+##### Verify Changes in Mosquitto Pod:
+- Use kubectl get pods to check the status of the Mosquitto Pod.
+- Access the Pod's shell using:
+
+        kubectl exec -it <pod-name> -- /bin/sh.
+- Inside the Pod, verify the mosquitto.conf and passwords file in the mounted volumes.
+- Exit the Pod shell using the exit command.
 
 # Project: Install a Stateful Application on K8s using Helm
 ##### Created K8s cluster on Linode Kubernetes Engine:
