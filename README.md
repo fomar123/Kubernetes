@@ -87,10 +87,38 @@ To scale down stateful set:
 
 
 # Project: Deploy App from Private Docker Registry:
-##### Logg in to AWS Container Repository | docker login and create docker config.json file
-##### Create Secret component
-##### Configure Deployment for demo app
+##### Log in to AWS Container Repository (ECR):
+- Use the docker login command to authenticate your Docker client with your AWS ECR registry:
 
+       docker login -u AWS -p <AWS_ACCESS_KEY_ID> -e none <AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com
+  
+- Replace <AWS_ACCESS_KEY_ID>, <AWS_ACCOUNT_ID>, and <AWS_REGION> with your AWS credentials.
+
+##### Create Docker Config JSON File:
+- Create a config.json file with Docker credentials. You can generate it using a script like:
+
+         echo "{\"auths\":{\"<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com\":{\"username\":\"AWS\",\"password\":\"<AWS_ACCESS_KEY_ID>\"}}}" > config.json
+- Then, base64 encode the config.json file:
+
+       cat config.json | base64
+##### Create Kubernetes Secret:
+- Create a Kubernetes Secret using the base64-encoded config.json value and apply it
+- Apply the Secret using
+
+         kubectl apply -f ecr-secret.yaml.
+
+##### Configure Deployment for Demo App:
+- Define a Deployment configuration YAML for your demo app (my-app-deployment.yaml).
+  
+- In the Deployment spec, add the Secret reference under imagePullSecret
+  
+![Screenshot 2023-08-13 at 02 19 51](https://github.com/fomar123/Kubernetes/assets/90075757/2dac5782-7e98-4567-96fe-df738a75a8bc)
+
+- Apply the Deployment using:
+
+        kubectl apply -f demo-app-deployment.yaml.
+
+  
 # Deploy Prometheus Stack using Helm
 ##### Install Prometheus Operator Helm Chart:
  helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
