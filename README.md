@@ -138,113 +138,147 @@ To scale down stateful set:
 
 
 # Project: Deploy Microservices Application
-##### Created YAML file with 11 Deployments and Services
-##### Created a K8s cluster with 3 Worker Nodes on Linode
-##### Connect to Kubernetes Cluster With Kubeconfig.yaml file:
-export KUBECONFIG=~/Downloads/online-shop-microservices-kubeconfig.yaml 
-##### Created a Namespace and deployed all the microervices into it:
-kubectl create ns microservices
-kubectl apply -f config.yaml -n microservices 
-##### Accessed Online Shop with Browser 
+##### Created YAML file with 11 Deployments and Services:
+- Created a  YAML file (config.yaml) containing configurations for 11 Deployments and Services
+  
+##### Kubernetes Cluster Setup:
+- Set up a Kubernetes cluster on Linode with 3 worker nodes.
 
-# Project: Improved Microservices Config Files. Security Best Practices
-##### Added version to each container image
-##### Configured Liveness Probe for each containe:
+##### Cluster Connection:
+- Connected to the Kubernetes cluster using the kubeconfig.yaml file:
+  
+        export KUBECONFIG=~/Downloads/online-shop-microservices-kubeconfig.yaml
+  
+##### Namespace and Deployment:
+- Created a dedicated namespace for microservices:
+  
+            kubectl create ns microservices
 
- 
-    livenessProbe:
+- Deployed all microservices using the config.yaml file within the microservices namespace:
+
+                kubectl apply -f config.yaml -n microservices
+
+##### Accessing Application:
+- Accessed the Online Shop application through a web browser after deploying the microservices and services
+
    
-    periodSeconds: 5
-          
+# Improved Microservices Config Files: Security Best Practices:
+
+##### Version Tagging:
+-Added version tags to each container image for better image management and traceability.
+
+##### Liveness Probe:
+- Configured a Liveness Probe for each container to ensure their health:
+
+            livenessProbe:
+  
+        periodSeconds: 5
+  
           exec:
-          
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
-##### Configured Readiness Probe for each container:
+  
+        command: ["/bin/grpc_health_probe", "-addr=:8080"]
 
   
- 
-      readinessProbe:
+##### Readiness Probe:
+- Configured a Readiness Probe for each container to indicate their readiness:
+
+           readinessProbe:
   
-       periodSeconds: 5
-          
-          exec:
-          
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
-
- ##### Configured Resource Requests resources and Resource Limits: 
- 
-          requests:
-          
-            cpu: 100m
-            
-            memory: 64Mi
-            
-          limits:
-          
-            cpu: 200m
-            
-            memory: 128Mi
-        
- #####  Configure more than 1 Replica for each Deployment     
+      periodSeconds: 5
   
- # Project: Create Helm Chart for Microservices and Deploy Microservices with Helmfile
- 
- #####  Created “microservices” Helm Chart
- 
- #####  Created values.yaml files for each microservice
- 
- #####  Created “redis” Helm Chart
- 
- #####  Deployed Microservices Application with “helm install”:
-    
-    helm install -f [name of file] [realse name] [chart name]
-    
- ##### Created Helmfile
- ##### Install Helmfile:
-         helmfile sync
-         
- # Project: Deploy to EKS cluster from Jenkins Pipeline
- 
-##### Installed kubectl inside Jenkins Container:
-      curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl      
+      exec:
+  
+      command: ["/bin/grpc_health_probe", "-addr=:8080"]
 
-##### Installed aws-iam-authenticator inside Jenkins Container:
-        curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
+##### Resource Requests and Limits:
+- Set resource requests and limits for CPU and memory usage for each container:  
 
-##### 
-        Apply execute permissions to the binary:
-           chmod +x ./aws-iam-authenticator
-           
-        Move aws authenticator file: 
-           mv ./aws-iam-authenticator /usr/local/bin
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+         cpu: 200m
+         memory: 128Mi
 
+##### Replica Configuration:
+- Configured more than one replica for each Deployment to enhance availability and redundancy
 
-##### Created ./kube/config and copied inside the Jenkins Container:
-          docker cp config f16b145b5924:/var/jenkins_home/.kube
-          
-##### Created Jenkins Credential  
+# Project: Create Helm Chart for Microservices and Deploy with Helmfile:
 
-##### Created Jenkinsfile that deploys an EKS cluster
+##### Helm Chart Creation:
+- Developed a Helm chart named "microservices" for the Microservices Application
+- Prepared individual values.yaml files for each microservice within the Helm chart
+  
+##### Redis Helm Chart:
+- Created a separate Helm chart for deploying Redis
+  
+##### Deploying Microservices with Helm:
+-Deployed the Microservices Application using Helm with custom values:
 
-      
-#  Project: Create EKS cluster with Node Group
+           helm install -f [values file] [release name] [chart name]
+
+##### Helmfile Setup:
+- Established a Helmfile to manage multiple Helm releases.
+  
+#### Install Helmfile:
+- Synchronized and deployed Helm releases using Helmfile:
+
+             helmfile sync
+  
+# Project: Deploy to EKS Cluster from Jenkins Pipeline:
+##### Jenkins Container Setup:
+- Installed kubectl inside the Jenkins container using:
+
+         curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/linux/amd64/kubectl
+
+- Installed aws-iam-authenticator inside the Jenkins container using:
+
+       curl -Lo aws-iam-authenticator https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.5.9/aws-iam-authenticator_0.5.9_linux_amd64
+       chmod +x ./aws-iam-authenticator
+       mv ./aws-iam-authenticator /usr/local/bin
+       
+##### Jenkins Container Configuration:
+- Created a config file for Kubernetes and copied it into the Jenkins container:
+
+       docker cp config f16b145b5924:/var/jenkins_home/.kube
+
+##### Jenkins Configuration:
+- Set up a Jenkins credential to securely store necessary credentials.
+
+  
+##### Jenkinsfile Creation:
+- Created a Jenkinsfile that defines the steps to deploy an EKS cluster using the configured tools and credentials.         
  
-##### Created EKS Role 
-##### Created VPC with Cloudformation Template
-##### Created EKS cluster
-##### Connected to EKS cluster with kubectl locally:
-        create kubeconfig file: 
-           aws eks  update-kubeconfig  --name  [name of cluster]
- ##### Created Node Group Role 
- ##### Created Node Group: EC2 Instances - Worker Nodes
- ##### Configure Auto-Scaling - Deployed cluster-autoscaler Pod
- ##### Created new Policy for Auto-Scaling Permission
- ##### Attached new Policy to existing Node Group Role
- #####  Deployed Autoscaler Component in EKS cluster:
-             kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml 
-        
- #####  Deployed Nginx Pod and Service:  
-           kubectl apply -f nginx-config.yaml
+
+# Project: Create EKS Cluster with Node Group:
+
+##### EKS Cluster Setup:
+- Created an EKS Role to grant necessary permissions for the EKS cluster
+- Created a Virtual Private Cloud (VPC) using a CloudFormation template
+- Deployed an EKS cluster using the AWS Management Console or CLI
+  
+##### Local Kubectl Configuration:
+- Created a kubeconfig file for local kubectl access:
+
+          aws eks update-kubeconfig --name [cluster name]
+  
+##### Node Group Creation:
+- Created a Node Group Role to define permissions for worker nodes
+- Set up an EC2-based Node Group to provide worker nodes for the EKS cluster
+ 
+##### Auto-Scaling Configuration:
+- Configured auto-scaling for the EKS cluster by deploying the cluster-autoscaler Pod:
+
+             kubectl apply -f https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler- autodiscover.yaml
+
+- Created a new policy for auto-scaling permissions and attached it to the Node Group Role
+  
+##### Deploy Nginx Pod and Service:
+- Deployed an Nginx Pod and Service in the EKS cluster using a nginx-config.yaml file.
+
+
+
             
            
 #    Project - Create Pipeline and deploy to Linode Kubernetes cluster:
