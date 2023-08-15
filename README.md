@@ -278,32 +278,54 @@ To scale down stateful set:
 - Deployed an Nginx Pod and Service in the EKS cluster using a nginx-config.yaml file.
 
 
+# Project: Create Pipeline and Deploy to Linode Kubernetes Cluster:
 
-            
-           
-#    Project - Create Pipeline and deploy to Linode Kubernetes cluster:
-#####      Created LKE cluster and Download kubeconfig.yaml from linode and set it as an environmental variable:
-                export KUBECONFIG=~/Downloads/LKS-kubeconfig.yaml
-#####        Created Jenkins Credential with kubeconfig file
-##### Installed Kubernetes CLI Plugin on Jenkins
-##### Created Jenkinsfile that deploys to LKE cluster
+##### LKE Cluster Setup:
+- Created a Linode Kubernetes Engine (LKE) cluster
+- Downloaded the kubeconfig.yaml file provided by Linode
+- Set the KUBECONFIG environment variable to the kubeconfig.yaml file path:
+
+             export KUBECONFIG=~/Downloads/LKS-kubeconfig.yaml
+  
+##### Jenkins Credential Setup:
+- Created a Jenkins Credential to securely store the kubeconfig file
+  
+##### Jenkins Configuration:
+-Installed the Kubernetes CLI Plugin on Jenkins for Kubernetes integration
+
+##### Jenkinsfile Creation:
+- Developed a Jenkinsfile that defines the deployment steps to the LKE cluster
+  
  
- 
- 
-# Project - Complete CI/CD Pipeline with DockerHub:
-#####  Created Deployment and Service for App deployment
-#####  Adjust Jenkinsfile to set environment variables with envsubs
-##### Installed “gettext-base” tool inside Jenkins Container on DigitalOcean Server in CLI:
-       First go to root user :
-             docker exec -it -u 0 <container name> bash
-	   Install gettext-base:
-              apt-get install gettext-base 
-##### Created Secret for DockerHub Registry in EKS cluster (connect to EKS cluster if not already) and reference it in the  Deployment file:
-        kubectl create secret docker-registry my-registry-key \
-        --docker-server=docker.io \
-        --docker-username=fomar123 \
-        --docker-password=<your docker passoword>
-#####  Executed Jenkins Pipeline 
+ # Project: Complete CI/CD Pipeline with DockerHub:
+
+##### App Deployment Setup:
+- Created a Deployment and Service for deploying your application.
+  
+##### Jenkinsfile Update - Environment Variables:
+- Adjusted the Jenkinsfile to set environment variables using 'envsubs'
+  
+##### Tool Installation in Jenkins Container:
+- Installed the gettext-base tool inside the Jenkins container running on a DigitalOcean server through CLI:
+  
+         Accessed the Jenkins container as root user:
+
+                    docker exec -it -u 0 <container name> bash
+  
+- Installed gettext-base tool:
+
+          apt-get install gettext-base
+          DockerHub Secret Configuration:
+
+##### Connected to your EKS cluster (if not already connected)
+- Created a Kubernetes Secret for DockerHub Registry:
+
+           kubectl create secret docker-registry my-registry-key \
+           --docker-server=docker.io \
+           --docker-username=fomar123 \
+           --docker-password=<your docker password>
+  
+- Referenced the created secret in your Deployment file to securely access DockerHub.
 
 
 #  Project - Complete CI/CD Pipeline with AWS ECR
