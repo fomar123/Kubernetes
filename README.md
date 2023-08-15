@@ -338,4 +338,28 @@ To scale down stateful set:
                --docker-username=<your username> \
                --docker-password=<your password >
 
- 
+
+# Project: Complete CI/CD Pipeline with AWS ECR:
+##### AWS ECR Setup:
+- Created an AWS ECR (Elastic Container Registry) repository to store Docker images
+  
+##### Jenkins Credential Setup:
+- Created a Jenkins Credential to securely store the credentials for the ECR repository
+  
+#### AWS ECR Secret Configuration:
+- Created a Kubernetes Secret for AWS ECR Registry within your EKS cluster.
+- Adjusted the reference to the secret in your Deployment file.
+- Created the Secret using CLI:
+
+       kubectl create secret docker-registry aws-registry key \
+       --docker-server=<your docker repository url> \
+       --docker-username=<your username> \
+       --docker-password=<your password>\
+
+
+By following these steps, you've successfully set up a complete CI/CD Pipeline with AWS ECR integration. Docker images are stored in the ECR repository, and credentials are securely managed in Jenkins and Kubernetes, ensuring a streamlined and secure deployment process to your EKS cluster.
+
+
+
+
+
