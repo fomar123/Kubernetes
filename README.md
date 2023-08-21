@@ -5,7 +5,7 @@
 
 ##### Create ConfigMap Component to Overwrite mosquitto.conf File:
 - Define a ConfigMap in a YAML file (configmap-file.yaml).
-- Include metadata and data for mosquitto.conf customization.
+- Include metadata and data for mosquitto.conf customisation.
 - Apply the ConfigMap using:
   
          kubectl apply -f configmap-file.yaml.
@@ -72,6 +72,7 @@
 • add helm repository: 
 
      helm repo add stable https://charts.helm.sh/stable
+     
 • install helm chart: 
 
       helm install nginx-ingress stable/nginx-ingress --set controller.publishService.enabled=true
@@ -98,9 +99,11 @@ To scale down stateful set:
 - Create a config.json file with Docker credentials. You can generate it using a script like:
 
          echo "{\"auths\":{\"<AWS_ACCOUNT_ID>.dkr.ecr.<AWS_REGION>.amazonaws.com\":{\"username\":\"AWS\",\"password\":\"<AWS_ACCESS_KEY_ID>\"}}}" > config.json
+
 - Then, base64 encode the config.json file:
 
        cat config.json | base64
+  
 ##### Create Kubernetes Secret:
 - Create a Kubernetes Secret using the base64-encoded config.json value and apply it
 - Apply the Secret using
@@ -214,7 +217,7 @@ To scale down stateful set:
 - Created a separate Helm chart for deploying Redis
   
 ##### Deploying Microservices with Helm:
--Deployed the Microservices Application using Helm with custom values:
+- Deployed the Microservices Application using Helm with custom values:
 
            helm install -f [values file] [release name] [chart name]
 
@@ -222,7 +225,7 @@ To scale down stateful set:
 - Established a Helmfile to manage multiple Helm releases.
   
 #### Install Helmfile:
-- Synchronized and deployed Helm releases using Helmfile:
+- Synchronised and deployed Helm releases using Helmfile:
 
              helmfile sync
   
@@ -291,7 +294,7 @@ To scale down stateful set:
 - Created a Jenkins Credential to securely store the kubeconfig file
   
 ##### Jenkins Configuration:
--Installed the Kubernetes CLI Plugin on Jenkins for Kubernetes integration
+- Installed the Kubernetes CLI Plugin on Jenkins for Kubernetes integration
 
 ##### Jenkinsfile Creation:
 - Developed a Jenkinsfile that defines the deployment steps to the LKE cluster
@@ -356,8 +359,6 @@ To scale down stateful set:
        --docker-username=<your username> \
        --docker-password=<your password>\
 
-
-By following these steps, you've successfully set up a complete CI/CD Pipeline with AWS ECR integration. Docker images are stored in the ECR repository, and credentials are securely managed in Jenkins and Kubernetes, ensuring a streamlined and secure deployment process to your EKS cluster.
 
 
 
